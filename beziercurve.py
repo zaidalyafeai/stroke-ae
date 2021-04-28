@@ -9,7 +9,7 @@ def bij(t, i, n):
 
 def draw_bezier(ctrlPoints, rWeights = None, nCtrlPoints = 0, nPointsCurve = 100, start_xy = None, annotate = True, return_curve=False,
     ctrlPointPlotKwargs = dict(marker='X', color='r', linestyle='--'), curvePlotKwagrs = dict(color='g'),
-    draw_axis = plt):
+    draw_axis = plt, plot_markers = True):
     '''
     Draws a Bezier curve with given control points
 
@@ -71,10 +71,11 @@ def draw_bezier(ctrlPoints, rWeights = None, nCtrlPoints = 0, nPointsCurve = 100
       ctrlPoints = ctrlPoints + start_xy
     
     # Plot the curve
-    draw_axis.plot(ctrlPoints[:,0], ctrlPoints[:,1], **ctrlPointPlotKwargs)
-    for n, ctrlPoint in enumerate(ctrlPoints):
-      if annotate:
-         draw_axis.annotate(str(n), (ctrlPoint[0], ctrlPoint[1]), color=ctrlPointPlotKwargs['color'])
+    if plot_markers:
+        draw_axis.plot(ctrlPoints[:,0], ctrlPoints[:,1], **ctrlPointPlotKwargs)
+        for n, ctrlPoint in enumerate(ctrlPoints):
+          if annotate:
+             draw_axis.annotate(str(n), (ctrlPoint[0], ctrlPoint[1]), color=ctrlPointPlotKwargs['color'])
 
     
     draw_axis.plot(curve[:,0], curve[:,1], **curvePlotKwagrs)
