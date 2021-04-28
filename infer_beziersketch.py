@@ -7,7 +7,7 @@ from torch.nn.utils.rnn import pad_sequence, pack_padded_sequence, pad_packed_se
 from quickdraw.quickdraw import QuickDraw
 from beziercurve import draw_bezier
 
-def drawsketch(ctrlpts, ratws, st_starts, n_stroke, draw_axis=plt.gca(), invert_y=True):
+def drawsketch(ctrlpts, ratws, st_starts, n_stroke, draw_axis=plt.gca(), invert_y=True, plot_markers = True):
     ctrlpts, ratws, st_starts = ctrlpts[:n_stroke], ratws[:n_stroke], st_starts[:n_stroke]
     # ctrlpts = ctrlpts.view(-1, ctrlpts.shape[-1] // 2, 2)
     
@@ -31,7 +31,7 @@ def drawsketch(ctrlpts, ratws, st_starts, n_stroke, draw_axis=plt.gca(), invert_
 
         draw_bezier(ctrlpt, rWeights=None, start_xy=st_start, draw_axis=draw_axis, annotate=False,
             ctrlPointPlotKwargs=dict(color='g', linestyle='--', marker='X', alpha=0.4),
-            curvePlotKwagrs=dict(color='r'))
+            curvePlotKwagrs=dict(color='r'), plot_markers = plot_markers)
     if invert_y:
         draw_axis.invert_yaxis()
 
